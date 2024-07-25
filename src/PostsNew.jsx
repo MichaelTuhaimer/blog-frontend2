@@ -1,8 +1,14 @@
-export function PostsNew() {
+export function PostsNew({ onCreate }) {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const params = new FormData(event.target);
+    onCreate(params, () => event.target.reset());
+  };
+
   return (
     <div>
       <h1>New Post</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           Title: <input name="title" type="text" />
         </div>
